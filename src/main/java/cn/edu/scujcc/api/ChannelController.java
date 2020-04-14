@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.scujcc.model.Channel;
 import cn.edu.scujcc.service.ChannelService;
-//	ÆµµÀ½Ó¿Ú
+//	é¢‘é“æ¥å£
 @RestController
 @RequestMapping("/channel")
 public class ChannelController {
@@ -24,61 +24,62 @@ public class ChannelController {
 			LoggerFactory.getLogger(ChannelController.class);
 	@Autowired
 	private ChannelService service; 
-//	»ñÈ¡ËùÓĞÄãÆµµÀ
+//	è·å–æ‰€æœ‰ä½ é¢‘é“
 	@GetMapping
 	public List<Channel> getAllChannel() {
-	logger.info("ÕıÔÚ·µ»Ø´òÓ¡ĞÅÏ¢£º");
+	logger.info("æ­£åœ¨è¿”å›æ‰“å°å…¨éƒ¨ä¿¡æ¯ï¼š");
 	List<Channel>  result=service.getAllChannel();
-		logger.debug("ËùÒÔÆµµÀÊı£º"+result.size());
+//		logger.debug("æ‰€ä»¥é¢‘é“æ•°ï¼š"+result.size());
 		return result;
 		
 	}
-//	»ñÈ¡Ò»¸öÖ¸¶¨ÆµµÀ
+//	è·å–ä¸€ä¸ªæŒ‡å®šé¢‘é“
 	@GetMapping("/{id}")
 	public  Channel  getChannel(@PathVariable String id) {
 		Channel c=service.getChannel(id);
+		logger.info("æ­£åœ¨æ‰“å°"+id+"ä¿¡æ¯ï¼š");
 		if(c!=null) {
 			return c;
 		}else {
-			logger.error("ÕÒ²»µ½Ö¸¶¨ÆµµÀ");
+			logger.error("æ‰¾ä¸åˆ°æŒ‡å®šé¢‘é“");
 			return null;
 		}
 		
 	}
-//	É¾³ıÒ»¸öÖ¸¶¨ÆµµÀ
+//	åˆ é™¤ä¸€ä¸ªæŒ‡å®šé¢‘é“
 	@DeleteMapping("/{id}")
  public ResponseEntity<String> deleteChannel(@PathVariable String id){
-		System.out.println("¼´½«É¾³ıÖ¸¶¨ÆµµÀ,id="+id);
+		System.out.println("å³å°†åˆ é™¤æŒ‡å®šé¢‘é“,id="+id);
 		boolean result=service.deleteChannel(id);
 		if(result) {
-			return ResponseEntity.ok().body("É¾³ı³É¹¦");
+			return ResponseEntity.ok().body("åˆ é™¤æˆåŠŸ");
 		}else {
-			return ResponseEntity.ok().body("É¾³ıÊ§°Ü");
+			return ResponseEntity.ok().body("åˆ é™¤å¤±è´¥");
 		}
 	 
  }
-//	ĞÂ½¨Ò»¸öÆµµÀ
+//	æ–°å»ºä¸€ä¸ªé¢‘é“
 	@PostMapping
 	public Channel createChannel1(@RequestBody Channel c) {
-		System.out.println("¼´½«´´½¨ÆµµÀ"+c);
+		System.out.println("å³å°†åˆ›å»ºé¢‘é“"+c);
 		Channel saved=service.createChannel(c);
 		return saved;
 	}
 	@PutMapping
 	public Channel updateChannel(@RequestBody Channel c) {
-		System.out.println("¼´½«¸üĞÂÆµµÀ"+c);
+		System.out.println("å³å°†æ›´æ–°é¢‘é“"+c);
 		Channel update=service.updateChannel(c);
 		return update;
 	}
 	@GetMapping("/s/{title}")
 	public List<Channel> searchTitle(@PathVariable String title) {
-		System.out.println("¼´½«Ñ°ÕÒ±êÌâ"+title);
+		System.out.println("å³å°†å¯»æ‰¾æ ‡é¢˜"+title);
 		List<Channel> t=service.searchTitle(title);
 		return t;
 	}
 	@GetMapping("/q/{quality}")
 	public List<Channel> searchQuality(@PathVariable String quality) {
-		System.out.println("¼´½«Ñ°ÕÒÇåÎú¶È"+quality);
+		System.out.println("å³å°†å¯»æ‰¾æ¸…æ™°åº¦"+quality);
 		List<Channel> q=service.searchQuality(quality);
 		return q;
 	}
