@@ -29,7 +29,7 @@ public class ChannelController {
 	public List<Channel> getAllChannel() {
 	logger.info("正在返回打印全部信息：");
 	List<Channel>  result=service.getAllChannel();
-//		logger.debug("所以频道数："+result.size());
+		logger.debug("所以频道数："+result.size());
 		return result;
 		
 	}
